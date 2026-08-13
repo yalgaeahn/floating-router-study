@@ -1,0 +1,14 @@
+[project]
+name = "my-circuit-study"
+version = "0.1.0"
+requires-python = ">=3.12,<3.13"
+dependencies = ["remote-circuit"]
+
+[tool.uv.sources]
+remote-circuit = { git = "https://github.com/yalgaeahn/remote-circuit.git", rev = "f1bcd51ecb67c2fb5d4f393d470869c1eb19c0fa" }
+
+[dependency-groups]
+dev = ["ipykernel>=6.29", "nbclient>=0.10", "pytest>=8.0"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

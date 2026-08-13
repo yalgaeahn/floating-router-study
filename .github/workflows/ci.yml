@@ -1,0 +1,14 @@
+name: Experiment CI
+
+on: [push, pull_request]
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+      - run: uv python install 3.12
+      - run: uv sync --locked
+      - run: uv run remote-circuit check experiment.toml
+      - run: uv run pytest

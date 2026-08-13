@@ -1,0 +1,28 @@
+schema_version = 1
+name = "my-remote-dtc-study"
+
+[circuit]
+path = "circuits/remote_dtc.yaml"
+
+[model]
+type = "remote_dtc"
+
+[sweep]
+paths = ["common"]
+idle = { theta_over_pi = 0.695 }
+
+[[sweep.axes]]
+name = "theta_over_pi"
+unit = "over_pi"
+minimum = 0.68
+maximum = 0.71
+points = 3
+
+[methods]
+zmethod = true
+
+[numerics]
+preset = "smoke"
+
+[output]
+directory = "results"

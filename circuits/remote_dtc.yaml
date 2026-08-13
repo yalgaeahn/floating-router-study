@@ -1,0 +1,11 @@
+schema_version: 1
+type: remote_dtc
+name: remote-dtc-template
+coordinates: [Q1, Q2, m11, m12, DTC_L1, DTC_L2, DTC_R1, DTC_R2]
+source_parameters:
+  cable_z0_ohm: 50.0
+  cable_mode_antinode_pf: 11.6
+  cable_mode_indices: [11, 12]
+  cable_dtc_coupling_ff: 30.0
+  qubit_dtc_coupling_ff: 8.0
+  dtc_alpha: 0.3
