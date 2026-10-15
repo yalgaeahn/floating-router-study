@@ -1,0 +1,6 @@
+recursive-include configs *.toml
+recursive-include examples *.py *.yaml *.toml
+recursive-include notebooks *.ipynb *.json
+recursive-include scripts *.py
+recursive-include tests *.py *.json
+recursive-include docs *.md

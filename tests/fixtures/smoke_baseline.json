@@ -1,0 +1,9 @@
+{
+  "config": "smoke/floating_island_router.toml",
+  "circuit_fingerprint": "152cdff49d99b2295741849e0e609d5be11815aed5e621530bb7575d89d76a0c",
+  "exact_j_ghz": -0.0003544386572438504,
+  "exact_zz_ghz": -5.642103619862837e-06,
+  "sw_zz_ghz": -6.363217227658719e-06,
+  "rtol": 1e-07,
+  "atol": 1e-11
+}

@@ -1,14 +1,40 @@
-name: Experiment CI
+name: Study CI
 
-on: [push, pull_request]
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+    inputs:
+      expensive:
+        description: Run long convergence and publication checks
+        type: boolean
+        default: false
 
 jobs:
-  smoke:
+  study:
     runs-on: ubuntu-latest
+    timeout-minutes: 360
+    defaults:
+      run:
+        working-directory: study
+    env:
+      CIRCUIT_STUDY_RUN_EXPENSIVE: ${{ inputs.expensive && '1' || '0' }}
+      FLOATING_ROUTER_RUN_EXPENSIVE: ${{ inputs.expensive && '1' || '0' }}
+      MPLCONFIGDIR: /tmp/matplotlib
     steps:
       - uses: actions/checkout@v4
+        with:
+          path: study
+      - uses: actions/checkout@v4
+        with:
+          repository: yalgaeahn/remote-circuit
+          ref: ${{ vars.REMOTE_CIRCUIT_REF || 'main' }}
+          token: ${{ secrets.REMOTE_CIRCUIT_READ_TOKEN || github.token }}
+          path: remote-circuit
       - uses: astral-sh/setup-uv@v6
       - run: uv python install 3.12
       - run: uv sync --locked
-      - run: uv run remote-circuit check experiment.toml
       - run: uv run pytest
+      - run: uv run ruff check src tests scripts examples
+      - run: uv run mypy
+      - run: uv build

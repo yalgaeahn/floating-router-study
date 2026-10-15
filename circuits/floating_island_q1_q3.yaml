@@ -1,0 +1,360 @@
+# Q1-Q3 pair mapped to the two-qubit, 9-node floating-island router model.
+# Non-qubit parameters reproduce the original Q1-Q3 study.
+schema_version: 2
+name: floating-island-q1-q3
+model: floating_island_router
+components:
+- name: Q1
+  type: floating_transmon
+  nodes:
+  - 1
+  - 7
+- name: Q3
+  type: floating_transmon
+  nodes:
+  - 2
+  - 8
+- name: R
+  type: junction_network
+  nodes:
+  - 3
+  - 4
+  - 5
+  - 6
+- name: M
+  type: floating_node
+  nodes:
+  - 9
+connections:
+- kind: JJ
+  nodes:
+  - 1
+  - 7
+  values:
+  - EJqL=21.584nH
+  - ECJq=1e6GHz
+- kind: JJ
+  nodes:
+  - 1
+  - 7
+  values:
+  - EJqL
+  - ECJq
+- kind: C
+  nodes:
+  - 1
+  - 7
+  values:
+  - EC17=47.70fF
+- kind: JJ
+  nodes:
+  - 2
+  - 8
+  values:
+  - EJqR=20.796nH
+  - ECJq
+- kind: JJ
+  nodes:
+  - 2
+  - 8
+  values:
+  - EJqR
+  - ECJq
+- kind: C
+  nodes:
+  - 2
+  - 8
+  values:
+  - EC28=47.57fF
+- kind: C
+  nodes:
+  - 1
+  - 3
+  values:
+  - EC13=15.52fF
+- kind: C
+  nodes:
+  - 4
+  - 2
+  values:
+  - EC24=15.55fF
+- kind: C
+  nodes:
+  - 1
+  - 0
+  values:
+  - ECg1=105.54fF
+- kind: C
+  nodes:
+  - 2
+  - 0
+  values:
+  - ECg2=105.68fF
+- kind: C
+  nodes:
+  - 3
+  - 0
+  values:
+  - ECg3=173.86fF
+- kind: C
+  nodes:
+  - 4
+  - 0
+  values:
+  - ECg4=172.54fF
+- kind: C
+  nodes:
+  - 9
+  - 0
+  values:
+  - ECg9=844.97fF
+- kind: C
+  nodes:
+  - 5
+  - 0
+  values:
+  - ECg5=112.03fF
+- kind: C
+  nodes:
+  - 6
+  - 0
+  values:
+  - ECg6=112.58fF
+- kind: C
+  nodes:
+  - 3
+  - 5
+  values:
+  - EC35=49.90fF
+- kind: C
+  nodes:
+  - 6
+  - 4
+  values:
+  - EC46=49.85fF
+- kind: JJ
+  nodes:
+  - 3
+  - 5
+  values:
+  - EJs1=10.72nH
+  - ECJs=1e6GHz
+- kind: JJ
+  nodes:
+  - 3
+  - 5
+  values:
+  - EJs1
+  - ECJs
+- kind: JJ
+  nodes:
+  - 6
+  - 4
+  values:
+  - EJs2=10.72nH
+  - ECJs
+- kind: JJ
+  nodes:
+  - 6
+  - 4
+  values:
+  - EJs2
+  - ECJs
+- kind: C
+  nodes:
+  - 5
+  - 9
+  values:
+  - EC59=106.56fF
+- kind: C
+  nodes:
+  - 9
+  - 6
+  values:
+  - EC69=107.12fF
+- kind: C
+  nodes:
+  - 7
+  - 0
+  values:
+  - ECg7=122.09fF
+- kind: C
+  nodes:
+  - 8
+  - 0
+  values:
+  - ECg8=125.36fF
+subsystems:
+- name: Q1
+  kind: floating_transmon
+  nodes:
+  - 1
+  - 7
+  role: computational_qubit
+  external_flux_parameters:
+  - Phi1
+  squids:
+  - node: 1
+    other_node: 7
+    josephson_symbols:
+    - EJqL
+    - EJqL
+    flux_parameter: Phi1
+- name: Q3
+  kind: floating_transmon
+  nodes:
+  - 2
+  - 8
+  role: computational_qubit
+  external_flux_parameters:
+  - Phi2
+  squids:
+  - node: 2
+    other_node: 8
+    josephson_symbols:
+    - EJqR
+    - EJqR
+    flux_parameter: Phi2
+- name: R
+  kind: floating_island_router
+  nodes:
+  - 3
+  - 5
+  - 6
+  - 4
+  role: coupler
+  external_flux_parameters:
+  - Phi3
+  - Phi4
+  squids:
+  - node: 3
+    other_node: 5
+    josephson_symbols:
+    - EJs1
+    - EJs1
+    flux_parameter: Phi3
+  - node: 6
+    other_node: 4
+    josephson_symbols:
+    - EJs2
+    - EJs2
+    flux_parameter: Phi4
+controls:
+  common:
+    phi3: coordinate
+    phi4: coordinate
+  single_s1:
+    phi3: coordinate
+    phi4: idle_phi4
+  single_s2:
+    phi3: idle_phi3
+    phi4: coordinate
+coordinate_reduction:
+  coordinate_names:
+  - lambda_L
+  - lambda_R
+  - u1
+  - u2
+  - q1
+  - q2
+  - s1
+  - s2
+  - m
+  transformation_matrix:
+  - - 0
+    - 0
+    - 1
+    - 0
+    - 1
+    - 0
+    - 0
+    - 0
+    - 0
+  - - 0
+    - 0
+    - 0
+    - 1
+    - 0
+    - 1
+    - 0
+    - 0
+    - 0
+  - - 1
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 1
+    - 0
+    - 0
+  - - 0
+    - 1
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 1
+    - 0
+  - - 1
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+  - - 0
+    - 1
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+  - - 0
+    - 0
+    - 1
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+  - - 0
+    - 0
+    - 0
+    - 1
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+  - - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 1
+  active_coordinates:
+  - q1
+  - q2
+  - s1
+  - s2
+  free_coordinates:
+  - lambda_L
+  - lambda_R
+  - u1
+  - u2
+  - m
+parameters:
+  computational_qubits:
+  - Q1
+  - Q3
+  tunable_subsystem: R

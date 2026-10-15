@@ -1,14 +1,39 @@
+[build-system]
+requires = ["setuptools>=69"]
+build-backend = "setuptools.build_meta"
+
 [project]
-name = "my-circuit-study"
+name = "floating-router-study"
 version = "0.1.0"
 requires-python = ">=3.12,<3.13"
-dependencies = ["remote-circuit"]
+dependencies = ["remote-circuit==0.11.0"]
 
-[tool.uv.sources]
-remote-circuit = { git = "https://github.com/yalgaeahn/remote-circuit.git", rev = "f1bcd51ecb67c2fb5d4f393d470869c1eb19c0fa" }
+[project.entry-points."remote_circuit.models"]
+floating_island_router = "floating_router_study.plugin:MODEL"
+
+[tool.setuptools.packages.find]
+where = ["src"]
 
 [dependency-groups]
-dev = ["ipykernel>=6.29", "nbclient>=0.10", "pytest>=8.0"]
+dev = ["ipykernel>=6.29", "nbclient>=0.10", "nbformat>=5.10", "pytest>=8", "ruff>=0.11", "mypy>=1.15", "build>=1.2"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+markers = [
+    "smoke: solver-backed numerical regression",
+    "converged: opt-in publication-scale validation",
+    "expensive: opt-in long baseline and convergence runs",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+[tool.ruff.lint]
+select = ["E4", "E7", "E9", "F"]
+[tool.mypy]
+python_version = "3.12"
+ignore_missing_imports = true
+files = ["src/floating_router_study/adapter.py", "src/floating_router_study/plugin.py"]
+
+[tool.uv.sources]
+remote-circuit = { path = "../remote-circuit", editable = true }

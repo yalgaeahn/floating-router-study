@@ -1,0 +1,46 @@
+schema_version = 2
+name = "floating-island-q1-q3-baseline"
+
+[circuit]
+path = "../circuits/floating_island_q1_q3.yaml"
+
+[sweep]
+paths = ["common"]
+idle = { phi3_over_pi = 0.0, phi4_over_pi = 0.0 }
+
+[[sweep.axes]]
+name = "phi_over_pi"
+unit = "over_pi"
+minimum = 0.0
+maximum = 1.0
+points = 101
+
+[methods]
+exact = true
+schrieffer_wolff = true
+
+[numerics]
+preset = "converged"
+
+[numerics.components.Q1]
+truncated_dim = 4
+ncut = 7
+
+[numerics.components.Q3]
+truncated_dim = 4
+ncut = 7
+
+[numerics.components.R]
+truncated_dim = 16
+ncut = 11
+
+[numerics.backends.exact]
+reliable_overlap_floor = 0.75
+ambiguity_overlap_floor = 0.5
+
+[numerics.backends.schrieffer_wolff]
+maximum_order = 5
+
+[output]
+directory = "../results"
+basename = "q1-q3-baseline-v2.h5"
